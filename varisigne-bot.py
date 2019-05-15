@@ -9,7 +9,6 @@ import io
 import os.path
 import time
 import logging
-import sys
 
 BOT_NAME='varisigne'
 SCREEN_NAME='Signe Brander väreissä'
@@ -51,7 +50,6 @@ def process_tweet(tweet, reply=False):
             #t.statuses.update(status=text, media_ids=img_id)
         already_posted.add(response['id'])
         logging.info("* Tweet successfully sent.")
-        sys.exit()
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s: %(message)s')
 
@@ -69,9 +67,9 @@ t_upload = twitter.Twitter(domain='upload.twitter.com',
 
 # initialize since_id by looking for our own most recent tweet
 since_id = 1
-#for tweet in t.statuses.user_timeline(screen_name=SCREEN_NAME, count=1):
-#    since_id = max(since_id, int(tweet['id']))
-#logging.debug("* Initialized since_id to %d", since_id)
+for tweet in t.statuses.user_timeline(screen_name=SCREEN_NAME, count=1):
+    since_id = max(since_id, int(tweet['id']))
+logging.debug("* Initialized since_id to %d", since_id)
 
 # keep track of already posted record IDs
 already_posted = set()
