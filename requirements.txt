@@ -1,0 +1,4 @@
+twitter
+requests
+ImageHash
+Pillow
