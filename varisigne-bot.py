@@ -27,14 +27,13 @@ def parse_tweet(tweet, reply=False):
     if tweet['user']['screen_name'] == SCREEN_NAME:
         return None # ignore my own tweets
     logging.info("%s @%s: %s", tweet['created_at'], tweet['user']['screen_name'], tweet['text'])
-    logging.info(tweet)
     if 'media' in tweet['entities']:
         text = ' '.join(tweet['text'].split(' ')[:-1])
         image_url = tweet['entities']['media'][0]['media_url_https']
         response = requests.get(image_url + ':large')
         image = PIL.Image.open(io.BytesIO(response.content))
         imghash = str(imagehash.dhash(image))
-        logging.info(imghash)
+        logging.info("found image with hash %s", imghash)
         imgfn = os.path.join(IMAGEDIR, imghash + '.png')
         if os.path.exists(imgfn):
             return {'id': tweet['id_str'], 'text': text, 'imagefile': imgfn}
