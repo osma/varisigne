@@ -82,7 +82,7 @@ already_posted = set()
 
 while True:
     logging.info("* Querying for status of followed users since %d", since_id)
-    for tweet in t.statuses.home_timeline(since_id=since_id, count=STATUS_MAXCOUNT):
+    for tweet in t.statuses.home_timeline(since_id=since_id, count=STATUS_MAXCOUNT, tweet_mode='extended'):
         since_id = max(since_id, int(tweet['id']))
         process_tweet(tweet)
     
