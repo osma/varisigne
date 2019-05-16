@@ -12,6 +12,7 @@ import logging
 
 BOT_NAME='varisigne'
 SCREEN_NAME='Signe Brander väreissä'
+SIGNE_BOT_NAME='signebrander'
 
 IMAGEDIR='colorized'
 CREDENTIALS_FILE='~/.varisignebot_credentials'
@@ -24,8 +25,8 @@ STATUS_MAXCOUNT=20 # maximum number of status messages to process per cycle
 
 def parse_tweet(tweet, reply=False):
     """parse a single incoming tweet, returning a (text, result) tuple"""
-    if tweet['user']['screen_name'] == SCREEN_NAME:
-        return None # ignore my own tweets
+    if tweet['user']['screen_name'] != SIGNE_BOT_NAME:
+        return None # ignore tweets not directly from the Signe Brander bot
     logging.info("%s @%s: %s", tweet['created_at'], tweet['user']['screen_name'], tweet['text'])
     if 'media' in tweet['entities']:
         text = ' '.join(tweet['text'].split(' ')[:-1])
