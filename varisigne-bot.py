@@ -40,6 +40,10 @@ def parse_tweet(tweet, reply=False):
         imgfn = os.path.join(IMAGEDIR, imghash + '.png')
         if os.path.exists(imgfn):
             return {'id': tweet['id_str'], 'text': text, 'imagefile': imgfn}
+        else:
+            logging.info("no image with hash %s found", imghash)
+    else:
+        logging.info("no media in tweet")
     return None
 
 def process_tweet(tweet, reply=False):
