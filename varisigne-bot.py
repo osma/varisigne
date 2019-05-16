@@ -26,15 +26,17 @@ STATUS_MAXCOUNT=20 # maximum number of status messages to process per cycle
 def parse_tweet(tweet, reply=False):
     """parse a single incoming tweet, returning a (text, result) tuple"""
     if tweet['user']['screen_name'] != SIGNE_BOT_NAME:
+        logging.info("ignoring tweet from wrong user %s", tweet['user']['screen_name'])
         return None # ignore tweets not directly from the Signe Brander bot
     logging.info("%s @%s: %s", tweet['created_at'], tweet['user']['screen_name'], tweet['text'])
     if 'media' in tweet['entities']:
         text = ' '.join(tweet['text'].split(' ')[:-1])
         image_url = tweet['entities']['media'][0]['media_url_https']
-        response = requests.get(image_url + ':large')
+        logging.info("image URL: %s", image_url)
+        response = requests.get(image_url)
         image = PIL.Image.open(io.BytesIO(response.content))
         imghash = str(imagehash.dhash(image))
-        logging.info("found image with hash %s", imghash)
+        logging.info("image hash: %s", imghash)
         imgfn = os.path.join(IMAGEDIR, imghash + '.png')
         if os.path.exists(imgfn):
             return {'id': tweet['id_str'], 'text': text, 'imagefile': imgfn}
