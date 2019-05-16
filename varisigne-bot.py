@@ -28,9 +28,9 @@ def parse_tweet(tweet, reply=False):
     if tweet['user']['screen_name'] != SIGNE_BOT_NAME:
         logging.info("ignoring tweet from wrong user %s", tweet['user']['screen_name'])
         return None # ignore tweets not directly from the Signe Brander bot
-    logging.info("%s @%s: %s", tweet['created_at'], tweet['user']['screen_name'], tweet['text'])
+    logging.info("%s @%s: %s", tweet['created_at'], tweet['user']['screen_name'], tweet['full_text'])
     if 'media' in tweet['entities']:
-        text = ' '.join(tweet['text'].split(' ')[:-1])
+        text = ' '.join(tweet['full_text'].split(' ')[:-1])
         image_url = tweet['entities']['media'][0]['media_url_https']
         logging.info("image URL: %s", image_url)
         response = requests.get(image_url)
