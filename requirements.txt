@@ -1,4 +1,2 @@
-twitter
 requests
-ImageHash
-Pillow
+Mastodon.py
