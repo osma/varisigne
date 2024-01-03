@@ -8,11 +8,11 @@ import re
 from mastodon import Mastodon
 
 
-IMAGE_DATA = 'finna-data/finna-records-signe.jsonl'
-ORIG_IMAGE_DIR = 'finna-data/original/signe'
-COLOR_IMAGE_DIR = 'finna-data/colorized/signe'
+IMAGE_DATA = 'finna-data/finna-records-timiri.jsonl'
+ORIG_IMAGE_DIR = 'finna-data/original/timiri'
+COLOR_IMAGE_DIR = 'finna-data/colorized/timiri'
 FINNA_BASE_URL = 'https://finna.fi'
-TOKEN_FILE = 'signe.secret'
+TOKEN_FILE = 'timiri.secret'
 
 
 def orig_image_filename(record_id):
@@ -50,20 +50,20 @@ link = f"{FINNA_BASE_URL}/Record/{record['id']}"
 status_text = f"""
 {title}. ({year}, {collection})
 Alkuperäisen kuvan lähde: {link}
-Valokuvaaja Signe Brander, värit #DeOldify
+Valokuvaaja Ivan Timiriasew, värit #DeOldify
 """.strip()
 
 color_alt_text = f"""
 {title}. ({year}, {collection})
 
-Alkuperäisen valokuvan on ottanut Signe Brander. Tämä kuva on keinotekoisesti väritetty DeOldify-algoritmilla.
+Alkuperäisen valokuvan on ottanut Ivan Timiriasew. Tämä kuva on keinotekoisesti väritetty DeOldify-algoritmilla.
 """.strip()
 
 
 orig_alt_text = f"""
 {title}. ({year}, {collection})
 
-Alkuperäinen mustavalkoinen valokuva, jonka on ottanut Signe Brander.
+Alkuperäinen mustavalkoinen valokuva, jonka on ottanut Ivan Timiriasew.
 """.strip()
 
 
