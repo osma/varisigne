@@ -70,7 +70,7 @@ Alkuperäinen mustavalkoinen valokuva, jonka on ottanut Signe Brander.
 # Initialize Mastodon library
 mastodon = Mastodon(
     access_token = TOKEN_FILE,
-    api_base_url = 'https://botsin.space/'
+    api_base_url = 'https://mementomori.social/'
 )
 
 # Post it!
